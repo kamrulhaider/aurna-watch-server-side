@@ -123,8 +123,8 @@ async function run() {
       console.log(result);
       res.json(result);
     });
-  } finally {
-    // await client.close();
+  } catch (err) {
+    console.log(err);
   }
 }
 
