@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://aurnas-admin:pBXoyjtAvhYFIaKb@cluster0.vhqd6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vhqd6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -123,8 +123,8 @@ async function run() {
       console.log(result);
       res.json(result);
     });
-  } catch (err) {
-    console.log(err);
+  } finally {
+    // await client.close();
   }
 }
 
