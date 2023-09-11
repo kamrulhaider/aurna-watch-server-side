@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const { v4 } = require("uuid");
 const cors = require("cors");
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
@@ -135,20 +134,6 @@ app.get("/", (req, res) => {
   res.send("Hello Aurna watch!");
 });
 
-app.get("/", (req, res) => {
-  const path = `/item/${v4()}`;
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-});
-
-app.get("/item/:slug", (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
-
 app.listen(port, () => {
   console.log(`listening at ${port}`);
 });
-
-module.exports = app;
